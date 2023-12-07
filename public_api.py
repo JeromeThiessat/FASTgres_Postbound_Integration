@@ -1,16 +1,16 @@
 
 import os
 
-from database_connection import DatabaseConnection
-from hint_sets import HintSet
-from models.sync_model import Synchronizer
-from query_encoding.feature_extractor import EncodingInformation
-from workloads.workload import Workload
-from query_encoding.query import Query
-from query_encoding.encoded_query import EncodedQuery
-from models.context import Context
-from definitions import ROOT_DIR
-import utility as u
+from .database_connection import DatabaseConnection
+from .hint_sets import HintSet
+from .models.sync_model import Synchronizer
+from .query_encoding.feature_extractor import EncodingInformation
+from .workloads.workload import Workload
+from .query_encoding.query import Query
+from .query_encoding.encoded_query import EncodedQuery
+from .models.context import Context
+from .definitions import ROOT_DIR
+from .utility import load_pickle
 
 
 class Fastgres:
@@ -38,7 +38,7 @@ class Fastgres:
                 path = ROOT_DIR + "/models/saved_models/stack/fastgres.pkl"
             else:
                 raise NotImplemented("Unsupported workload name")
-            context_models = u.load_pickle(path)
+            context_models = load_pickle(path)
             self.models = context_models
         if self.enc_info is None:
             encoding_info = self.get_encoding_information()

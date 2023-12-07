@@ -3,21 +3,13 @@ import time
 
 import numpy as np
 
-import utility as u
-from hint_sets import HintSet
-from log_utils import get_logger
-from models.experience import Experience
-from models.train_model import Settings
-from workloads.workload import Workload
-from database_connection import DatabaseConnection
-from query_encoding.feature_extractor import EncodingInformation
-from experiment import Experiment
-from models.sync_model import Synchronizer
-from models.context import Context
-from query_encoding.query import Query
-from query_encoding.encoded_query import EncodedQuery
-from public_api import *
-from definitions import PG_IMDB, PG_STACK_OVERFLOW
+
+from .log_utils import get_logger
+from .models.experience import Experience
+from .models.train_model import Settings
+from .experiment import Experiment
+from .public_api import *
+from .definitions import PG_IMDB, PG_STACK_OVERFLOW
 
 
 class TrainingPhase:
@@ -89,11 +81,11 @@ class TestingPhase:
             logger.info(f"Query {query.name[:8]} with prediction: {prediction}")
             self.predictions['initial'][query_name] = prediction
 
-            # synchronizer.pre_execution()
-            # execution_time = synchronizer.run_query(query, HintSet(prediction), self.workload, use_timeout=True)
-            # global_reduction = synchronizer.post_execution(encoded_query, execution_time)
-            # for c_set, sync in self.context_models.items():
-            #     sync.reduce_cooldown(global_reduction)
+            synchronizer.pre_execution()
+            execution_time = synchronizer.run_query(query, HintSet(prediction), self.workload, use_timeout=True)
+            global_reduction = synchronizer.post_execution(encoded_query, execution_time)
+            for c_set, sync in self.context_models.items():
+                sync.reduce_cooldown(global_reduction)
 
 
 def run_workload():

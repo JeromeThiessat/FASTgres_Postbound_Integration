@@ -5,7 +5,7 @@ import pickle
 import numpy as np
 
 from typing import Any
-from hint_sets import HintSet
+from .hint_sets import HintSet
 
 
 def load_json(path: str):

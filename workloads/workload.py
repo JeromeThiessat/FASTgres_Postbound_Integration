@@ -1,7 +1,7 @@
 
 import os
 from mo_sql_parsing import parse
-from log_utils import get_logger
+from ..log_utils import get_logger
 from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 

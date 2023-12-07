@@ -1,6 +1,6 @@
 
 import logging
-from definitions import ROOT_DIR
+from .definitions import ROOT_DIR
 
 
 def get_logger():

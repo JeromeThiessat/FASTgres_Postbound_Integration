@@ -2,10 +2,10 @@
 import os.path
 import utility as u
 
-from models.train_model import Settings
-from workloads.workload import Workload
-from database_connection import DatabaseConnection
-from query_encoding.feature_extractor import EncodingInformation
+from .models.train_model import Settings
+from .workloads.workload import Workload
+from .database_connection import DatabaseConnection
+from .query_encoding.feature_extractor import EncodingInformation
 
 
 class Experiment:
